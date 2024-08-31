@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model home {
+  home_id        Int         @id @default(autoincrement())
+  street_address String      @unique(map: "street_address") @db.VarChar(255)
+  state          String?     @db.VarChar(50)
+  zip            String?     @db.VarChar(10)
+  sqft           Float?      @db.Float
+  beds           Int?
+  baths          Int?
+  list_price     Float?      @db.Float
+  users          user_home[]
+}
+
+model user {
+  user_id  Int         @id @default(autoincrement())
+  username String      @unique(map: "username") @db.VarChar(100)
+  email    String?     @db.VarChar(100)
+  homes    user_home[]
+}
+
+model user_home {
+  id      Int  @id @default(autoincrement())
+  user_id Int
+  home_id Int
+  user    user @relation(fields: [user_id], references: [user_id])
+  home    home @relation(fields: [home_id], references: [home_id])
+
+  @@index([home_id], map: "key_home")
+  @@index([user_id], map: "key_user")
+}

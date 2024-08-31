@@ -1,0 +1,19 @@
+GET http://localhost:3000/api/user/find-all
+
+### 
+
+GET http://localhost:3000/api/user/find-by-home/1
+
+###
+
+GET http://localhost:3000/api/home/find-by-user/1?page=1
+
+###
+
+PUT http://localhost:3000/api/home/update-users
+Content-Type: application/json
+
+{
+  "homeId": 1,
+  "userIds": [5,2]
+}
