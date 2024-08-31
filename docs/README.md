@@ -129,7 +129,19 @@ docker-compose -f docker-compose.initial.yml up --build -d
 
 ### solution
 
-> explain briefly your solution for this problem here
+**Database Modification:**
+
+- Create New Tables: Create "user" and "home" tables, each with an auto-generated id as the primary key.
+
+- Populate New Tables: Fill the new tables ("user" and "home") with data selected from the "user_home" table by matching 'username' for "user" and 'street_address' for "home".
+
+- Alter Existing Table: Alter the "user_home" table to add new columns for 'user_id' and 'home_id'. Set these columns as foreign keys to create a many-to-many relationship between the "user" and "home" tables.
+
+- Drop Unused Columns: Drop the columns in the "user_home" table that are no longer needed.
+
+- Push Changes to Database: Apply the new changes to the database on docker using the command:
+
+  `docker-compose -f docker-compose.final.yml up --build -d`
 
 ## 2. React SPA
 
@@ -220,7 +232,15 @@ docker-compose -f docker-compose.initial.yml up --build -d
 
 ### solution
 
-> explain briefly your solution for this problem here
+**Create UI:**
+
+- Setup React: Create React app and install the required dependencies, including Redux, Axios, and TailwindCSS.
+
+- Setup Redux: Configure Redux and create a store with userReducer and homeReducer to handle API calls and state management.
+
+- Components: Create components for (select bar, home cards, and edit users modal). Populate these components with data fetched from the API.
+
+- Error Handling: Implement error handling logic and create an error popup component.
 
 ## 3. Backend API development on Node
 
@@ -281,7 +301,15 @@ docker-compose -f docker-compose.initial.yml up --build -d
 
 ### solution
 
-> explain briefly your solution for this problem here
+**Create Endpoints:**
+
+- Setup Express: Create an Express server and have it listen on port 4000.
+
+- Setup Prisma: Configure Prisma and connect it to the MySQL database on port 3306. Pull models from the database using Prisma.
+
+- Routes and Controllers: Create routes and controllers for all endpoints, ensuring they handle the appropriate responses and error handling.
+
+- Define API Path: Place all endpoints under the path /api/.
 
 ## Submission Guidelines
 
