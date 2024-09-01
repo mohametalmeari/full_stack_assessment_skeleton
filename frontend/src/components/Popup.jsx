@@ -64,7 +64,7 @@ export const Popup = () => {
 
   return (
     <div className="fixed bg-gray-600/50 z-50 inset-0 flex items-center justify-center p-2">
-      <div className="bg-white p-5 rounded-lg">
+      <div className="bg-white p-5 rounded-lg w-full max-w-[400px]">
         <h2 className="font-bold mb-4">Modify Users for: {address}</h2>
         <div className="flex flex-col">
           {users.map((u) => (

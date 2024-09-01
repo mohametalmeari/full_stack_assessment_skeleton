@@ -9,7 +9,7 @@ export const Button = ({
     secondary: "bg-gray-300 hover:bg-gray-300/80 text-black",
     pagination: "text-gray-500 hover:text-black px-0 underline",
     close:
-      "bg-red-500 rounded-full aspect-square text-white px-0 py-0 w-[1.5rem] m-2",
+      "bg-red-500 rounded-full aspect-square text-white px-0 py-0 w-[1.5rem] m-2 before:w-[60%] before:bg-white before:h-[0.2rem] before:inline-block before:absolute before:top-[0.5] before:right-[0.5] before:-translate-x-[50%] before:-translate-y-[50%] before:rotate-45 after:w-[60%] after:bg-white after:h-[0.2rem] after:inline-block after:absolute after:top-[0.5] after:right-[0.5] after:-translate-x-[50%] after:-translate-y-[50%] after:-rotate-45",
   };
   return (
     <button
@@ -18,12 +18,6 @@ export const Button = ({
       disabled={disabled}
     >
       <span className={variant === "close" ? "sr-only" : ""}>{children}</span>
-      {variant === "close" && (
-        <>
-          <div className="w-[60%] bg-white h-[0.2rem] inline-block absolute top-[0.5] right-[0.5] -translate-x-[50%] -translate-y-[50%] rotate-45" />
-          <div className="w-[60%] bg-white h-[0.2rem] inline-block absolute top-[0.5] right-[0.5] -translate-x-[50%] -translate-y-[50%] -rotate-45" />
-        </>
-      )}
     </button>
   );
 };

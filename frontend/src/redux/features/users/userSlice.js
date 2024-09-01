@@ -11,7 +11,11 @@ export const findAllUsers = createAsyncThunk(
 
       return res.data.users;
     } catch (error) {
-      return thunkAPI.rejectWithValue("Something went wrong");
+      return thunkAPI.rejectWithValue(
+        error?.response?.data?.message ||
+          error?.message ||
+          "Something went wrong"
+      );
     }
   }
 );
@@ -25,7 +29,11 @@ export const findByHome = createAsyncThunk(
       );
       return res.data.users;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return thunkAPI.rejectWithValue(
+        error?.response?.data?.message ||
+          error?.message ||
+          "Something went wrong"
+      );
     }
   }
 );
@@ -66,9 +74,12 @@ const userSlice = createSlice({
       .addCase(findByHome.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.usersByHome = payload.map((u) => u.user_id);
+        console.log({ payload });
       })
       .addCase(findByHome.rejected, (state, { payload }) => {
         state.isLoading = false;
+        console.log(2, { payload });
+
         state.error = payload;
       });
   },
