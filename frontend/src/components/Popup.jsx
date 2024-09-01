@@ -2,18 +2,22 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findByHome } from "../redux/features/users/userSlice";
 import { Button } from "./Button";
-import { selectHome, updateUsers } from "../redux/features/users/homeSlice";
+import {
+  findByUser,
+  selectHome,
+  updateUsers,
+} from "../redux/features/users/homeSlice";
 import { Loading } from "./Loading";
 import { Error } from "./Error";
 
 export const Popup = () => {
   const dispatch = useDispatch();
 
-  const { users, usersByHome, isLoading, error } = useSelector(
+  const { users, usersByHome, isLoading, error, selectedUser } = useSelector(
     (state) => state.users
   );
 
-  const { selectedHome } = useSelector((state) => state.homes);
+  const { selectedHome, page } = useSelector((state) => state.homes);
   const homeId = selectedHome?.id;
   const address = selectedHome?.address;
 
@@ -55,9 +59,12 @@ export const Popup = () => {
 
   if (error) return <Error>{error}</Error>;
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!currentUsers.length) return;
-    dispatch(updateUsers({ homeId, userIds: currentUsers }));
+    await Promise.all([
+      dispatch(updateUsers({ homeId, userIds: currentUsers })),
+    ]);
+    dispatch(findByUser({ userId: selectedUser, page }));
 
     handleClose();
   };

@@ -74,12 +74,9 @@ const userSlice = createSlice({
       .addCase(findByHome.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.usersByHome = payload.map((u) => u.user_id);
-        console.log({ payload });
       })
       .addCase(findByHome.rejected, (state, { payload }) => {
         state.isLoading = false;
-        console.log(2, { payload });
-
         state.error = payload;
       });
   },

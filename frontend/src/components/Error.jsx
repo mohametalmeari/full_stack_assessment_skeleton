@@ -9,12 +9,12 @@ export const Error = ({ children }) => {
       <p>
         <b>Error: </b>
         <i>{children}!</i>
-        <div className="absolute top-0 right-0 ">
-          <Button onClick={() => setVisible(false)} variant="close">
-            Close
-          </Button>
-        </div>
       </p>
+      <div className="absolute top-0 right-0 ">
+        <Button onClick={() => setVisible(false)} variant="close">
+          Close
+        </Button>
+      </div>
     </div>
   );
 };
